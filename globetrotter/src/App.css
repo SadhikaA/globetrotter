@@ -1,13 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Cousine&display=swap');
 
 .App {
-  text-align: left;
+  text-align: center;
   margin: 5vh;
+  padding-right: 20vh;
+  padding-left: 20vh;
 }
 
 .info {
   font-family: 'Cousine', monospace;
-  color: #777777;
+  color: #59a6deff;
   font-weight: 800;
 }
 
