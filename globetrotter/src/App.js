@@ -1,7 +1,15 @@
-import { Text, Input, Select, Card, CardHeader, FormControl, FormLabel, Heading, CardBody, CardFooter, Button, SimpleGrid, Box, FormHelperText } from '@chakra-ui/react';
+import { Text, Input, Card, CardHeader, FormControl, FormLabel, Heading, CardBody, CardFooter, Button, SimpleGrid, Box, FormHelperText } from '@chakra-ui/react';
 import './App.css';
-import TagBar from "./TagBar";
 import { useState } from "react";
+import Select from 'react-select';
+
+
+const options = [
+  { value: 'chocolate', label: 'Chocolate' },
+  { value: 'strawberry', label: 'Strawberry' },
+  { value: 'vanilla', label: 'Vanilla' }
+]
+
 
 function App() {
   const countries = [
@@ -49,31 +57,61 @@ function App() {
             <FormLabel>Trip Name</FormLabel>
             <Input mb={4} placeholder='Trip Name' />
             <FormLabel>Country</FormLabel>
-            <FormHelperText mb={2} textAlign={'left'}>Select the largest region that you will be traveling within</FormHelperText>
-            <Select mb={4} placeholder='Select a country'>
-              {countries.map((country, index) => (
-                <option key={index} value={country}>
-                  {country}
-                </option>
-              ))}
-            </Select>
-            <FormLabel>Region/City</FormLabel>
-            <Select mb={4} placeholder='Select a region/city'>
-              {citiesInFrance.map((city, index) => (
-                <option key={index} value={city}>
-                  {city}
-                </option>
-              ))}
-            </Select>
+            <FormHelperText mb={2} textAlign={'left'}>Select the largest region that you will be traveling within.</FormHelperText>
+            <div style={{ marginBottom: "1em" }}>
+              <Select
+                options={countries.map((country) => ({
+                  value: country,
+                  label: country,
+                }))}
+                placeholder="Select a country"
+                mb={4}
+                styles={{
+                  control: (provided) => ({
+                    ...provided,
+                    textAlign: "left"
+                  })
+                }}
+              />
+            </div>
+            <div style={{ marginBottom: "1em" }}>
+              <FormLabel>Region/City</FormLabel>
+              <Select
+                options={citiesInFrance.map((city) => ({
+                  value: city,
+                  label: city,
+                }))}
+                placeholder="Select a region/city"
+                mb={4}
+                styles={{
+                  control: (provided) => ({
+                    ...provided,
+                    textAlign: "left"
+                  })
+                }}
+              />
+            </div>
             <SimpleGrid columns={2}>
-            <FormLabel>Choose start date</FormLabel>
-            <FormLabel>Choose end date</FormLabel>
-            <Input mb={4} type="date" />
-            <Input type="date" />
+              <FormLabel>Choose start date</FormLabel>
+              <FormLabel>Choose end date</FormLabel>
+              <Input mb={4} type="date" />
+              <Input type="date" />
             </SimpleGrid>
             <FormLabel>Select options below</FormLabel>
-            <FormHelperText mb={2} textAlign={'left'}>Select the largest region that you will be traveling within</FormHelperText>
-            <TagBar />
+            <FormHelperText mb={2} textAlign={'left'}>Select tags that match your interests and preferences.</FormHelperText>
+            <Select
+              isMulti
+              name="colors"
+              options={options}
+              className="basic-multi-select"
+              classNamePrefix="select"
+              styles={{
+                control: (provided) => ({
+                  ...provided,
+                  textAlign: "left"
+                })
+              }}
+            />
             <Button mt={4} colorScheme='blue'>Submit</Button>
           </FormControl>
         </Box>
