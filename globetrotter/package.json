@@ -15,6 +15,7 @@
     "dayzed": "^3.2.3",
     "flowbite-datepicker": "^1.2.2",
     "framer-motion": "^10.12.16",
+    "mapbox-gl": "^2.15.0",
     "react": "^18.2.0",
     "react-date-range": "^1.4.0",
     "react-dom": "^18.2.0",
