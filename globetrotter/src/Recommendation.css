@@ -3,5 +3,10 @@
     margin-left: 30vh;
     margin-right: 30vh;
     margin-top: 10vh;
-  }
-  
+    color: white;
+    background-color: #131516;
+}
+
+element.style {
+    color-scheme: dark;
+}
