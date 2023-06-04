@@ -1,6 +1,6 @@
-import { Text, Input, Select, Card, CardHeader, FormControl, FormLabel, Heading, CardBody, CardFooter, Button, SimpleGrid, Box, FormHelperText } from '@chakra-ui/react';
+import { Text, Input, Select, Card, CardHeader, FormControl, FormLabel, Heading, CardBody, CardFooter, Button, SimpleGrid, Box, FormHelperText, RangeSlider, RangeSliderTrack, RangeSliderFilledTrack, RangeSliderThumb, SliderTrack, SliderFilledTrack, SliderMarker } from '@chakra-ui/react';
 import './App.css';
-import { useState } from 'react';
+import TagBar from "./TagBar";
 
 function App() {
   const countries = [
@@ -32,15 +32,14 @@ function App() {
     // Add more cities as needed
   ];
 
-  const [selectedDates, setSelectedDates] = useState<Date>([new Date(), new Date()]);
-
 
   return (
     <div className="App">
       <Text
+        bgGradient='linear(to-r, #99DC94, #4a6ac2)'
+        bgClip='text'
         fontSize='5xl'
         fontWeight='bold'
-        color='#1c6ca6ff'
       >  globetrotter
       </Text>
       <p class="info">🌎 your AI-travel planner</p>
@@ -66,10 +65,22 @@ function App() {
                 </option>
               ))}
             </Select>
-            <RangeDatepicker
-              selectedDates={selectedDates}
-              onDateChange={setSelectedDates}
-            />
+            <FormLabel>Choose start date</FormLabel>
+            <Input mb={4} type="date" />
+            <FormLabel>Choose end date</FormLabel>
+            <Input type="date" />
+            <TagBar />
+            <RangeSlider aria-label={['20', '120']} defaultValue={[10, 30]}>
+              <RangeSliderTrack>
+                <RangeSliderFilledTrack />
+              </RangeSliderTrack>
+
+              <CustomSliderLabel value={0}>0</CustomSliderLabel>
+          <CustomSliderLabel value={50}>50</CustomSliderLabel>
+          <CustomSliderLabel value={100}>100</CustomSliderLabel>
+              <RangeSliderThumb index={0} />
+              <RangeSliderThumb index={1} />
+            </RangeSlider>
             <Button mt={4} colorScheme='blue'>Submit</Button>
           </FormControl>
         </Box>
@@ -88,6 +99,22 @@ function App() {
       </SimpleGrid>
 
     </div>
+  );
+}
+
+function CustomSliderLabel({ value }) {
+  return (
+    <Box
+      position="absolute"
+      transform={`translateX(${value}%)`}
+      top="-20px"
+      textAlign="center"
+      width="40px"
+      fontSize="sm"
+      fontWeight="bold"
+    >
+      {value}
+    </Box>
   );
 }
 
