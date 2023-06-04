@@ -1,6 +1,6 @@
 import { Text, Input, Card, CardHeader, FormControl, FormLabel, Heading, CardBody, CardFooter, Button, SimpleGrid, Box, FormHelperText } from '@chakra-ui/react';
-import './App.css';
 import Select from 'react-select';
+import './Recommendation.css';
 
 const options = [
   { value: 'kid-friendly', label: 'kid-friendly' },

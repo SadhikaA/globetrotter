@@ -30,10 +30,17 @@ function Home() {
         bgGradient="linear(to-r, #99DC94, #4a6ac2)"
         bgClip="text"
         fontSize="6xl"
-        paddingBottom={500}
+        paddingBottom={550}
       >
         globetrotter
       </Text>
+      <Text
+        className="overlay-text"
+        fontSize="3xl"
+        fontWeight={600}
+        paddingBottom={450}
+        color={'white'}
+      >your AI trip planner</Text>
       <div className="button-container">
         <Link as={NavLink} to="/recommend">
           <Button colorScheme="teal">
