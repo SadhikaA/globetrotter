@@ -34,8 +34,8 @@ def get_document_title(document):
         return(title[0])
     return ''
 
-if "OPENAI_API_KEY" not in os.environ:
-    openai.api_key = ""
+# if "OPENAI_API_KEY" not in os.environ:
+openai.api_key = "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"
 
 assert len(openai.Model.list()["data"]) > 0
 print("fetching data")
@@ -88,7 +88,7 @@ text_splitter = RecursiveCharacterTextSplitter(
 
 documents = text_splitter.split_documents(docs)
 
-embeddings = OpenAIEmbeddings(openai_api_key="")
+embeddings = OpenAIEmbeddings(openai_api_key="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")
 
 db = lancedb.connect('/tmp/lancedb')
 table = db.create_table("city_docs", data=[
@@ -98,7 +98,7 @@ table = db.create_table("city_docs", data=[
 print("generated embeddings!")
 
 docsearch = LanceDB.from_documents(documents[5:], embeddings, connection=table)
-qa = RetrievalQA.from_chain_type(llm=OpenAI(openai_api_key=""), chain_type="stuff", retriever=docsearch.as_retriever())
+qa = RetrievalQA.from_chain_type(llm=OpenAI(openai_api_key="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"), chain_type="stuff", retriever=docsearch.as_retriever())
 
 query_file = open('query.pkl', 'wb')
 pickle.dump(qa, query_file)
