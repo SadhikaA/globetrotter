@@ -1,6 +1,5 @@
 import { Text, Input, Card, CardHeader, FormControl, FormLabel, Heading, CardBody, CardFooter, Button, SimpleGrid, Box, FormHelperText } from '@chakra-ui/react';
 import './App.css';
-import { useState } from "react";
 import Select from 'react-select';
 
 
