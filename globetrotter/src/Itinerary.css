@@ -1,0 +1,11 @@
+.Itinerary {
+    text-align: center;
+    margin-left: 80px;
+    margin-top: 10vh;
+    color: white;
+    background-color: #131516;
+}
+
+element.style {
+    color-scheme: dark;
+}

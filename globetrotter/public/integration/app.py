@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import openai
+<<<<<<< HEAD
 import pickle
 import openai
 import os
@@ -20,10 +21,16 @@ from langchain.chains import RetrievalQA
 app = Flask(__name__)
 CORS(app)
 # CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}}) # Enable CORS 
+=======
+
+app = Flask(__name__)
+CORS(app)
+>>>>>>> 54fdf251d8f53bb6d3054cf08822fc7eff8951ba
 
 @app.route('/', methods=['POST'])
 def submit_data():
     data = request.get_json()
+<<<<<<< HEAD
     trip = data.get('tripName')
     country = data.get('country')
     regionCity = data.get("regionCity")
@@ -135,3 +142,19 @@ def submit_data():
 
 if __name__ == '__main__':
     app.run(port=5000)
+=======
+    trip= data.get('trip')
+    country = data.get('country')
+    print(country)
+    openai.api_key = ""
+    # Process the received data
+    # # Perform necessary operations with the database or any other logic
+    # Example response:
+    response_data = {'message': country}
+    response = jsonify(response_data)
+    response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
+    return response, 200
+
+if __name__ == '__main__':
+    app.run(port=5000)
+>>>>>>> 54fdf251d8f53bb6d3054cf08822fc7eff8951ba

@@ -28,6 +28,14 @@ function Recommendation() {
         // Add more form fields as needed
       });
  
+    const [formData, setFormData] = useState({
+        tripName: '',
+        country: '',
+        regionCity: '',
+        preferences: '',
+        // Add more form fields as needed
+      });
+ 
     const handleSubmit = async () => {
         try {
             const response = await axios.post('http://127.0.0.1:5000', formData);
@@ -43,6 +51,27 @@ function Recommendation() {
             // Handle errors, if any
         }
     };
+    
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        console.log(name); 
+        console.log(value);
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          [name]: value,
+        }));
+    };
+
+    const handleSelectChange = (selectedOption, name) => {
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          [name]: selectedOption.value,
+        }));
+        console.log(selectedOption);
+        console.log(name);
+        console.log(formData);
+      };
+
     
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -117,10 +146,15 @@ function Recommendation() {
                 <FormControl>
                     <FormLabel >Trip Name</FormLabel>
                     <Input mb={4} placeholder='Trip Name' name="tripName" value={formData.tripName} onChange={handleChange}/>
+                    <FormLabel >Trip Name</FormLabel>
+                    <Input mb={4} placeholder='Trip Name' name="tripName" value={formData.tripName} onChange={handleChange}/>
                     <FormLabel>Country</FormLabel>
                     <FormHelperText mb={2} textAlign={'left'}>Select the largest region that you will be traveling within.</FormHelperText>
                     <div style={{ marginBottom: "1em" }}>
                         <Select
+                            name = "country"
+                            value= {formData.country}
+                            onChange = {(selectedOption) => handleSelectChange(selectedOption, 'country')}
                             name = "country"
                             value= {formData.country}
                             onChange = {(selectedOption) => handleSelectChange(selectedOption, 'country')}
@@ -136,6 +170,9 @@ function Recommendation() {
                     <div style={{ marginBottom: "1em" }}>
                         <FormLabel>Region/City</FormLabel>
                         <Select
+                            name = "region_city"
+                            value = {formData.regionCity}
+                            onChange = {(selectedOption) => handleSelectChange(selectedOption, 'regionCity')}
                             name = "region_city"
                             value = {formData.regionCity}
                             onChange = {(selectedOption) => handleSelectChange(selectedOption, 'regionCity')}
@@ -158,6 +195,9 @@ function Recommendation() {
                     <FormHelperText mb={2} textAlign={'left'}>Select tags that match your interests and preferences.</FormHelperText>
                     <Select
                         isMulti
+                        name="preferences"
+                        value = {formData.preferences}
+                        onChange = {(selectedOption) => handleSelectChange(selectedOption, 'preferences')}
                         name="preferences"
                         value = {formData.preferences}
                         onChange = {(selectedOption) => handleSelectChange(selectedOption, 'preferences')}
