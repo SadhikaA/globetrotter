@@ -1,6 +1,7 @@
-import { Text, Input, Select, Card, CardHeader, FormControl, FormLabel, Heading, CardBody, CardFooter, Button, SimpleGrid, Box, FormHelperText, RangeSlider, RangeSliderTrack, RangeSliderFilledTrack, RangeSliderThumb, SliderTrack, SliderFilledTrack, SliderMarker } from '@chakra-ui/react';
+import { Text, Input, Select, Card, CardHeader, FormControl, FormLabel, Heading, CardBody, CardFooter, Button, SimpleGrid, Box, FormHelperText } from '@chakra-ui/react';
 import './App.css';
 import TagBar from "./TagBar";
+import { useState } from "react";
 
 function App() {
   const countries = [
@@ -31,7 +32,6 @@ function App() {
     "Nîmes"
     // Add more cities as needed
   ];
-
 
   return (
     <div className="App">
@@ -65,22 +65,15 @@ function App() {
                 </option>
               ))}
             </Select>
+            <SimpleGrid columns={2}>
             <FormLabel>Choose start date</FormLabel>
-            <Input mb={4} type="date" />
             <FormLabel>Choose end date</FormLabel>
+            <Input mb={4} type="date" />
             <Input type="date" />
+            </SimpleGrid>
+            <FormLabel>Select options below</FormLabel>
+            <FormHelperText mb={2} textAlign={'left'}>Select the largest region that you will be traveling within</FormHelperText>
             <TagBar />
-            <RangeSlider aria-label={['20', '120']} defaultValue={[10, 30]}>
-              <RangeSliderTrack>
-                <RangeSliderFilledTrack />
-              </RangeSliderTrack>
-
-              <CustomSliderLabel value={0}>0</CustomSliderLabel>
-          <CustomSliderLabel value={50}>50</CustomSliderLabel>
-          <CustomSliderLabel value={100}>100</CustomSliderLabel>
-              <RangeSliderThumb index={0} />
-              <RangeSliderThumb index={1} />
-            </RangeSlider>
             <Button mt={4} colorScheme='blue'>Submit</Button>
           </FormControl>
         </Box>
@@ -99,22 +92,6 @@ function App() {
       </SimpleGrid>
 
     </div>
-  );
-}
-
-function CustomSliderLabel({ value }) {
-  return (
-    <Box
-      position="absolute"
-      transform={`translateX(${value}%)`}
-      top="-20px"
-      textAlign="center"
-      width="40px"
-      fontSize="sm"
-      fontWeight="bold"
-    >
-      {value}
-    </Box>
   );
 }
 
