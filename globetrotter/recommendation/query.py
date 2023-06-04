@@ -5,7 +5,7 @@ query_file = open("query.pkl", "rb")
 qa = pickle.load(query_file)
 query_file.close()
 
-openai.api_key = "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"
+openai.api_key = ""
 
 query = "Create a 2 day trip in Paris for a couple that likes nature in bullet list."
 print(qa.run(query)) 
