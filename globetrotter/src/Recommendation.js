@@ -70,30 +70,6 @@ function Recommendation() {
         "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu",
         "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"]
 
-    const citiesInFrance = [
-        "Paris",
-        "Marseille",
-        "Lyon",
-        "Toulouse",
-        "Nice",
-        "Nantes",
-        "Strasbourg",
-        "Montpellier",
-        "Bordeaux",
-        "Lille",
-        "Rennes",
-        "Reims",
-        "Le Havre",
-        "Cannes",
-        "Saint-Étienne",
-        "Toulon",
-        "Angers",
-        "Grenoble",
-        "Dijon",
-        "Nîmes"
-        // Add more cities as needed
-    ];
-
     const inputStyles = {
         control: (provided, { colorMode }) => ({
             ...provided,
