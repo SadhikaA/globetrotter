@@ -115,7 +115,7 @@ function Recommendation() {
                             name = "region_city"
                             value = {formData.regionCity}
                             onChange = {(selectedOption) => handleSelectChange(selectedOption, 'regionCity')}
-                            options={citiesInFrance.map((city) => ({
+                            options={countries.map((city) => ({
                                 value: city,
                                 label: city,
                             }))}
