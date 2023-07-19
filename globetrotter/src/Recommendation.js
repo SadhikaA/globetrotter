@@ -1,7 +1,11 @@
-import { NumberInputStepper, Input, NumberInputField, NumberInput, FormControl, FormLabel, Button, SimpleGrid, Box, FormHelperText, NumberIncrementStepper, NumberDecrementStepper } from '@chakra-ui/react';
+import {
+    NumberInputStepper, Input, NumberInputField, NumberInput, FormControl, FormLabel, Button, SimpleGrid, Box, FormHelperText, NumberIncrementStepper, NumberDecrementStepper, HStack, PinInput, PinInputField, RangeSlider,
+    RangeSliderTrack,
+    RangeSliderFilledTrack,
+    RangeSliderThumb,
+} from '@chakra-ui/react';
 import Select from 'react-select';
 import './Recommendation.css';
-import axios from 'axios';
 import { useState } from 'react';
 
 const options = [
@@ -20,50 +24,6 @@ const options = [
 
 
 function Recommendation() {
-    const [formData, setFormData] = useState({
-        tripName: '',
-        country: '',
-        regionCity: '',
-        preferences: '',
-        // Add more form fields as needed
-      });
- 
-    const handleSubmit = async () => {
-        try {
-            const response = await axios.post('http://127.0.0.1:5000', formData);
-            console.log("RECEIVED RESPONSE!");
-            console.log(response);
-            // const trip = data.get("tripName");
-            // console.log(trip);
-            console.log("RECEIVED DATA!");
-            console.log(response.data);  // Log the response from the backend
-            // Perform any necessary actions after successful submission 
-        } catch (error) {
-            console.error(error);
-            // Handle errors, if any
-        }
-    };
-    
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        console.log(name); 
-        console.log(value);
-        setFormData((prevFormData) => ({
-          ...prevFormData,
-          [name]: value,
-        }));
-    };
-
-    const handleSelectChange = (selectedOption, name) => {
-        setFormData((prevFormData) => ({
-          ...prevFormData,
-          [name]: selectedOption.value,
-        }));
-        console.log(selectedOption);
-        console.log(name);
-        console.log(formData);
-      };
-
 
     const countries = [
         "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo, Democratic Republic of the", "Congo, Republic of the", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor (Timor-Leste)", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea, North", "Korea, South", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar (Burma)", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Macedonia (formerly Macedonia)", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand",
@@ -85,21 +45,24 @@ function Recommendation() {
         }),
     };
 
-
     return (
         <div className="Recommendation">
-            <form onSubmit={handleSubmit}>  
             <Box>
                 <FormControl>
+                    <FormLabel >OpenAI API Key</FormLabel>
+                    <Input mb={4} placeholder='Enter OpenAI API Key' name="tripName" />
                     <FormLabel >Trip Name</FormLabel>
-                    <Input mb={4} placeholder='Trip Name' name="tripName" value={formData.tripName} onChange={handleChange}/>
-                    <FormLabel>Country</FormLabel>
+                    <Input mb={4} placeholder='Give your trip a title!' name="tripName" />
+                    <FormLabel >Region</FormLabel>
+                    <FormHelperText mb={2} textAlign={'left'}>Select the largest region that you will be traveling within.</FormHelperText>
+                    <FormLabel >Starting Point</FormLabel>
+                    <FormHelperText mb={2} textAlign={'left'}>Select the starting point for your trip.</FormHelperText>
+
+                    {/* <FormLabel>Country</FormLabel>
                     <FormHelperText mb={2} textAlign={'left'}>Select the largest region that you will be traveling within.</FormHelperText>
                     <div style={{ marginBottom: "1em" }}>
                         <Select
                             name = "country"
-                            value= {formData.country}
-                            onChange = {(selectedOption) => handleSelectChange(selectedOption, 'country')}
                             options={countries.map((country) => ({
                                 value: country,
                                 label: country,
@@ -113,9 +76,7 @@ function Recommendation() {
                         <FormLabel>Region/City</FormLabel>
                         <Select
                             name = "region_city"
-                            value = {formData.regionCity}
-                            onChange = {(selectedOption) => handleSelectChange(selectedOption, 'regionCity')}
-                            options={countries.map((city) => ({
+                                options={countries.map((city) => ({
                                 value: city,
                                 label: city,
                             }))}
@@ -123,8 +84,8 @@ function Recommendation() {
                             mb={4}
                             styles={inputStyles}
                         />
-                    </div>
-                    <SimpleGrid columns={2}>
+                    </div> */}
+                    <SimpleGrid columns={2} columnGap={10}>
                         <FormLabel>Choose start date</FormLabel>
                         <FormLabel>Choose end date</FormLabel>
                         <Input mb={4} type="date" />
@@ -135,25 +96,39 @@ function Recommendation() {
                     <Select
                         isMulti
                         name="preferences"
-                        value = {formData.preferences}
-                        onChange = {(selectedOption) => handleSelectChange(selectedOption, 'preferences')}
                         options={options}
                         className="basic-multi-select"
                         classNamePrefix="select"
                         styles={inputStyles}
                     />
-                    <FormLabel mt={4}>Max Price ($)</FormLabel>
-                    <NumberInput max={50} min={10}>
-                        <NumberInputField />
-                        <NumberInputStepper>
-                            <NumberIncrementStepper />
-                            <NumberDecrementStepper />
-                        </NumberInputStepper>
-                    </NumberInput>
-                    <Button mt={4} type="submit" colorScheme='blue'>Submit</Button>
+                    <HStack>
+                        <FormLabel mt={4}>Seniors</FormLabel>
+                        <PinInput mt={6} placeholder='👴'>
+                            <PinInputField />
+                        </PinInput>
+                        <FormLabel mt={4}>Adults</FormLabel>
+                        <PinInput mt={6} placeholder='🧑'>
+                            <PinInputField />
+                        </PinInput>
+                        <FormLabel mt={4}>Teens</FormLabel>
+                        <PinInput mt={6} placeholder='🧑‍🦱'>
+                            <PinInputField />
+                        </PinInput>
+                        <FormLabel mt={4}>Young Children</FormLabel>
+                        <PinInput mt={6} placeholder='🧒'>
+                            <PinInputField />
+                        </PinInput>
+                    </HStack>
+                    <FormLabel mt={4}>Price Range ($)</FormLabel>
+                    <RangeSlider aria-label={['min', 'max']} defaultValue={[10, 30]}>
+                        <RangeSliderTrack>
+                            <RangeSliderFilledTrack />
+                        </RangeSliderTrack>
+                        <RangeSliderThumb index={0} />
+                        <RangeSliderThumb index={1} />
+                    </RangeSlider>
                 </FormControl>
             </Box>
-            </form>
         </div>
     );
 }
