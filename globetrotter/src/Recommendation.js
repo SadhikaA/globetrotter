@@ -24,6 +24,12 @@ const options = [
 
 
 function Recommendation() {
+    const [range, setRange] = useState([10, 30]);
+
+    const handleRangeChange = (newRange) => {
+        setRange(newRange);
+    };
+
 
     const countries = [
         "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo, Democratic Republic of the", "Congo, Republic of the", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor (Timor-Leste)", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea, North", "Korea, South", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar (Burma)", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Macedonia (formerly Macedonia)", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand",
@@ -58,11 +64,11 @@ function Recommendation() {
                     <FormLabel >Starting Point</FormLabel>
                     <FormHelperText mb={2} textAlign={'left'}>Select the starting point for your trip.</FormHelperText>
 
-                    {/* <FormLabel>Country</FormLabel>
+                    <FormLabel>Country</FormLabel>
                     <FormHelperText mb={2} textAlign={'left'}>Select the largest region that you will be traveling within.</FormHelperText>
                     <div style={{ marginBottom: "1em" }}>
                         <Select
-                            name = "country"
+                            name="country"
                             options={countries.map((country) => ({
                                 value: country,
                                 label: country,
@@ -75,8 +81,8 @@ function Recommendation() {
                     <div style={{ marginBottom: "1em" }}>
                         <FormLabel>Region/City</FormLabel>
                         <Select
-                            name = "region_city"
-                                options={countries.map((city) => ({
+                            name="region_city"
+                            options={countries.map((city) => ({
                                 value: city,
                                 label: city,
                             }))}
@@ -84,7 +90,7 @@ function Recommendation() {
                             mb={4}
                             styles={inputStyles}
                         />
-                    </div> */}
+                    </div>
                     <SimpleGrid columns={2} columnGap={10}>
                         <FormLabel>Choose start date</FormLabel>
                         <FormLabel>Choose end date</FormLabel>
@@ -120,7 +126,15 @@ function Recommendation() {
                         </PinInput>
                     </HStack>
                     <FormLabel mt={4}>Price Range ($)</FormLabel>
-                    <RangeSlider aria-label={['min', 'max']} defaultValue={[10, 30]}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <div style={{ textAlign: 'left' }}>Min: {range[0]}</div>
+                        <div style={{ textAlign: 'right' }}>Max: {range[1]}</div>
+                    </div>
+                    <RangeSlider
+                        aria-label={['min', 'max']}
+                        defaultValue={range}
+                        onChange={handleRangeChange}
+                    >
                         <RangeSliderTrack>
                             <RangeSliderFilledTrack />
                         </RangeSliderTrack>
