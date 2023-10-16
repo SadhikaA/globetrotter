@@ -1,9 +1,8 @@
 import {
-    NumberInputStepper, Input, NumberInputField, NumberInput, FormControl, FormLabel, Button, SimpleGrid, Box, FormHelperText, NumberIncrementStepper, NumberDecrementStepper, HStack, PinInput, PinInputField, RangeSlider,
-    RangeSliderTrack,
-    RangeSliderFilledTrack,
-    RangeSliderThumb,
+    Input, FormControl, FormLabel, Button, SimpleGrid, Box, FormHelperText, HStack, PinInput, PinInputField, RangeSlider, RangeSliderTrack, RangeSliderFilledTrack, RangeSliderThumb,
 } from '@chakra-ui/react';
+import { Link } from "@chakra-ui/react";
+import { Link as NavLink } from "react-router-dom";
 import Select from 'react-select';
 import './Recommendation.css';
 import { useState } from 'react';
@@ -24,17 +23,20 @@ const options = [
 
 
 function Recommendation() {
-    const [range, setRange] = useState([10, 30]);
+    const [range, setRange] = useState([20, 40]);
 
     const handleRangeChange = (newRange) => {
         setRange(newRange);
     };
 
+    const choices = [
+        "London", "Tokyo", "Paris", "Rome", "Seoul", "Mumbai", "New York City", "Beijing", "Munich", "Istanbul", "Dubai", "Rio de Janeiro", "Sydney", "Los Angeles", "Moscow", "Barcelona", "Cairo", "Buenos Aires", "Los Angeles", "Vienna", "Prague", "Stockholm", "Cape Town", "Lima", "Helsinki", "Prague", "Copenhagen", "Oslo", "Toronto", "Bangkok", "Singapore", "San Francisco", "Berlin", "Athens", "Hong Kong"
+    ];
+
 
     const countries = [
-        "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo, Democratic Republic of the", "Congo, Republic of the", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor (Timor-Leste)", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea, North", "Korea, South", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar (Burma)", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Macedonia (formerly Macedonia)", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand",
-        "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu",
-        "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"]
+        "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo, Democratic Republic of the", "Congo, Republic of the", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor (Timor-Leste)", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea, North", "Korea, South", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar (Burma)", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Macedonia (formerly Macedonia)", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu",
+"Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"]
 
     const inputStyles = {
         control: (provided, { colorMode }) => ({
@@ -49,6 +51,7 @@ function Recommendation() {
             ...provided,
             color: 'black', // Set text color to black
         }),
+        menu: provided => ({ ...provided, zIndex: 9999 })
     };
 
     return (
@@ -59,30 +62,11 @@ function Recommendation() {
                     <Input mb={4} placeholder='Enter OpenAI API Key' name="tripName" />
                     <FormLabel >Trip Name</FormLabel>
                     <Input mb={4} placeholder='Give your trip a title!' name="tripName" />
-                    <FormLabel >Region</FormLabel>
-                    <FormHelperText mb={2} textAlign={'left'}>Select the largest region that you will be traveling within.</FormHelperText>
-                    <FormLabel >Starting Point</FormLabel>
-                    <FormHelperText mb={2} textAlign={'left'}>Select the starting point for your trip.</FormHelperText>
-
-                    <FormLabel>Country</FormLabel>
-                    <FormHelperText mb={2} textAlign={'left'}>Select the largest region that you will be traveling within.</FormHelperText>
-                    <div style={{ marginBottom: "1em" }}>
-                        <Select
-                            name="country"
-                            options={countries.map((country) => ({
-                                value: country,
-                                label: country,
-                            }))}
-                            placeholder="Select a country"
-                            mb={4}
-                            styles={inputStyles}
-                        />
-                    </div>
                     <div style={{ marginBottom: "1em" }}>
                         <FormLabel>Region/City</FormLabel>
                         <Select
                             name="region_city"
-                            options={countries.map((city) => ({
+                            options={choices.map((city) => ({
                                 value: city,
                                 label: city,
                             }))}
@@ -99,7 +83,7 @@ function Recommendation() {
                     </SimpleGrid>
                     <FormLabel>Select options below</FormLabel>
                     <FormHelperText mb={2} textAlign={'left'}>Select tags that match your interests and preferences.</FormHelperText>
-                    <Select
+                    <Select 
                         isMulti
                         name="preferences"
                         options={options}
@@ -142,6 +126,13 @@ function Recommendation() {
                         <RangeSliderThumb index={1} />
                     </RangeSlider>
                 </FormControl>
+                <div className="button-container">
+                    <Link as={NavLink} to="/recommend">
+                        <Button mt={4} colorScheme="blue">
+                            submit
+                        </Button>
+                    </Link>
+                </div>
             </Box>
         </div>
     );
